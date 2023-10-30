@@ -15,14 +15,7 @@ export async function POST(req){
     try{
         const rec = await req.json();
         console.log(rec);
-        const scheme =  Person({
-            firstName:rec.firstName,
-            lastName:rec.lastName,
-            email:rec.email,
-            mobile:rec.mobile,
-            password:rec.password,
-            address:rec.address
-        });
+        const scheme =  Person({...rec});
         const myData = await scheme.save();
         console.log(scheme);
         console.log(myData);
@@ -40,7 +33,7 @@ export async function POST(req){
 
 // function PATCH(){}
 
-// function DELETE(){}
+
 
 
 

@@ -57,6 +57,19 @@ const Page = () => {
         }
     }
 
+    const deleteHandler=async(id)=>{
+        try{
+            const res = await axios.delete(`/api/users/${id}`);
+            if(res.data.message=='Deleted Successfully'){
+                fetchUserApi();
+            }
+            console.log(res);
+        }catch(e){
+            console.log(e);
+            alert(e.message);
+        }
+    }
+
     useEffect(()=>{fetchUserApi()},[])
 
     return (
@@ -92,7 +105,7 @@ const Page = () => {
                                     return (
                                         <tr key={ind}>
                                             <td>{ind+1}</td>
-                                            <td>{user.firstName} {user.lastName}</td>
+                                            <td onClick={()=>{deleteHandler(user._id)}} >{user.firstName} {user.lastName}</td>
                                             <td>{user.wallet}</td>
                                             <td>{user.email}</td>
                                             <td>{user.mobile}</td>
